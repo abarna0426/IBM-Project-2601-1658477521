@@ -1,0 +1,46 @@
+int greenled = 5;
+int buzzer = A5;
+int sensor = A0;
+int sensorThresh = 350;
+
+void setup()
+{
+  
+  pinMode(greenled, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+  pinMode(sensor,INPUT);
+  pinMode(A4,INPUT);
+  Serial.begin(9600);
+ 
+
+}
+
+void loop()
+{ 
+  int value ;
+  int analogValue = analogRead(sensor);
+ Serial.print(analogValue);
+ value=analogRead(A4);
+ value=value*0.48828125;
+ Serial.print(value);
+  if(value>40)
+  {digitalWrite(buzzer,HIGH);}
+  else
+  {digitalWrite(buzzer,LOW);}
+  
+ if(analogValue>sensorThresh)
+ {
+  digitalWrite(greenled,HIGH);
+  tone(buzzer,1000,100000);
+  
+            
+}
+  else
+  {
+  
+  digitalWrite(greenled,LOW);
+  noTone(buzzer);
+  
+    
+  }
+}
